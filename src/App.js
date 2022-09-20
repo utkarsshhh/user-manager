@@ -1,23 +1,27 @@
-import logo from './logo.svg';
+
+import { useState } from 'react';
 import './App.css';
+// import Cards from './components/Card/Cards';
+import User from './components/User/User';
+import Users from './components/Users/Users';
+
+// import User from './components/User/User';
 
 function App() {
+  let userList = [{'id':'1','name':'Utkarsh','age':24}]
+  const [usersList,setUsersList] = useState(userList)
+  const onSubmitForm = (info) => {
+    info['id'] = (usersList.length + 1).toString()
+    setUsersList((prevState) => {
+      return [...prevState,info]
+    })
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <User submitForm = {onSubmitForm}/> 
+      
+      <Users userss = {usersList} />
+    
     </div>
   );
 }
